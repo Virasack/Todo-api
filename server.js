@@ -1,10 +1,9 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var _ = require('underscore');
-<<<<<<< HEAD
-=======
+
 var db = require ('./db.js');
->>>>>>> abfed4ff7f10021e87ebe32394d32214fc20611f
+
 
 var app = express();
 var PORT = process.env.PORT || 3000;
@@ -20,9 +19,9 @@ app.get('/', function (req, res){
 
 //GET /todos?completed=true
 app.get('/todos', function (req, res){
-<<<<<<< HEAD
+
     var queryParams = req.query;
-=======
+
     var query = req.query;
 
     var where = {};
@@ -67,15 +66,15 @@ app.get('/todos', function (req, res){
     res.json(filteredTodos);
 =======
     res.json(filteredTodos);*/
->>>>>>> abfed4ff7f10021e87ebe32394d32214fc20611f
+
 });
 
 //GET /todos/:id
 app.get('/todos/:id', function (req, res){
-<<<<<<< HEAD
+
     var todoId = parseInt (req.params.id);
     var matchedTodo = _.findWhere(todos, {id: todoId})
-=======
+
     var todoId = parseInt (req.params.id, 10);
 
     db.todo.findById(todoId).then(function(todo){
@@ -92,7 +91,7 @@ app.get('/todos/:id', function (req, res){
 
 
     //var matchedTodo = _.findWhere(todos, {id: todoId})
->>>>>>> abfed4ff7f10021e87ebe32394d32214fc20611f
+
    
     /* var matchedTodo;
     
@@ -120,9 +119,7 @@ app.get('/todos/:id', function (req, res){
 
 app.post('/todos', function (req, res){
     var body = _.pick(req.body, 'description', 'completed'); // use _.pick to only pick 'description', 'completed'
-<<<<<<< HEAD
-    
-=======
+
    
     db.todo.create(body).then(function (todo){
         res.json(todo.toJSON());
@@ -151,7 +148,7 @@ app.post('/todos', function (req, res){
     res.json(body);
 =======
     res.json(body); */
->>>>>>> abfed4ff7f10021e87ebe32394d32214fc20611f
+
   
 });
 
@@ -202,15 +199,15 @@ app.put('/todos/:id', function(req,res){
     
 });
 
-<<<<<<< HEAD
+
 app.listen(PORT, function () {
    console.log('Express listening on port ' + PORT + '!'); 
-=======
+
 db.sequelize.sync().then(function() {
     app.listen(PORT, function () {
        console.log('Express listening on port ' + PORT + '!'); 
     });
->>>>>>> abfed4ff7f10021e87ebe32394d32214fc20611f
+
 });
 
 
