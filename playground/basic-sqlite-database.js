@@ -19,20 +19,52 @@ var Todo = sequelize.define('todo', {
 	}
 });
 
+var User = sequelize.define('user', {
+	email: Sequelize.STRING
+});
+
+Todo.belongsTo(User);
+User.hasMany(Todo);
+
 sequelize.sync({
 	//force:true
 }).then(function (){
-	
-	Todo.findById(2).then(function(todo){
-		if(todo) {
-			console.log(todo.toJSON());
-		}
-		else {
-			console.log('Todo not found!');
-		}
+	console.log('Everything is synced');
+
+	User.findById(1).then(function (user){
+		user.getTodos({
+			where: {
+				completed:false
+			}
+		}).then(function (todos) {
+			todos.forEach(function (todo){
+				console.log(todo.toJSON());
+			});
+		});
 	});
 
-	/*console.log('Everything is synced');
+
+	// User.create({
+	// 	email: 'nikos@email.com'
+	// }).then( function () {
+	// 	return Todo.create({
+	// 		description: 'Clean bathroom'
+	// 	});
+	// }).then (function (todo) {
+	// 	User.findById(1).then(function (user){
+	// 		user.addTodo(todo);
+	// 	});
+	//});
+	// Todo.findById(2).then(function(todo){
+	// 	if(todo) {
+	// 		console.log(todo.toJSON());
+	// 	}
+	// 	else {
+	// 		console.log('Todo not found!');
+	// 	}
+	//});
+
+	/*
 
 	Todo.create({
 		description : 'Take out trash',
